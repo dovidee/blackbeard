@@ -1,8 +1,8 @@
 fun nok-til-euro(nok :: Number) -> Number:
   doc: "Tar en argument i kroner for å konvertere krone til euro"
   euro = 0.085 # 31 august valuta
-  convert = nok * euro
-  convert
+  konvert = nok * euro
+  konvert
 where:
   nok-til-euro(10) is 0.85 
   nok-til-euro(100) is 8.5
@@ -12,8 +12,8 @@ end
 fun nok-til-usd(nok :: Number) -> Number:
   doc: "Tar en argument i kroner for å konvertere krone til USD"
   usd = 0.095 # 31 august valuta
-  convert = nok * usd
-  convert
+  konvert = nok * usd
+  konvert
 where:
   nok-til-usd(10) is 0.95
   nok-til-usd(100) is 9.5
@@ -25,11 +25,11 @@ fun nok-til-joker(nok :: Number, valg :: String) -> Number:
   euro = 0.085 # 31 august valuta
   usd = 0.095 # 31 august valuta
   if valg == "euro":
-    convert = nok * euro
-    convert
+    konvert = nok * euro
+    konvert
   else if valg == "usd":
-    convert = nok * usd
-    convert
+    konvert = nok * usd
+    konvert
   else:
     raise("Ikke gyldig valuta") # raise error hvis valg argument er ikke euro eller usd
   end
