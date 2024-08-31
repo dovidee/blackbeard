@@ -14,21 +14,19 @@ fun filtrer_alder():
   end
   filtrer_nog
 end
-fun yngste_eldste(valg :: String) -> Table:
-  full_navn_og_epost = select first_name, last_name, email, age from dummy-table end
-  end
-with-min-max = extend dummy-table using age:
-  max: T.running-max of age,
-  min: T.running-min of age
-end
+fun yngste_eldste(valg :: String):
+  full_navn_og_epost = select first_name, last_name, email from dummy-table end
+  kodifisert = dummy-table.length() - 1 
   if valg == "yngste":
-  kodifisere = dummy-table.length() - 1
-  funnet = with-min-max.row-n(kodifisere)["min"]
-  funnet
+    filtrer_fnoe_yngst = order dummy-table: age descending end
+    finn_yngst = filtrer_fnoe_yngst.row-n(kodifisert)
+    fulldata = finn_yngst["first_name"] + " " + finn_yngst["last_name"] + ": " + finn_yngst["email"]
+    fulldata
   else if valg == "eldste":
-  kodifisere = dummy-table.length() - 1
-  funnet = with-min-max.row-n(kodifisere)["max"]
-  funnet
+    filtrer_fnoe_eldst = order dummy-table: age ascending end
+    finn_eldst = filtrer_fnoe_eldst.row-n(kodifisert)
+    fulldata = finn_eldst["first_name"] + " " + finn_eldst["last_name"] + ": " + finn_eldst["email"]
+    fulldata
   else:
     raise("Du må velge 'yngste' eller 'eldste' fra tabellen")
   end
