@@ -21,6 +21,7 @@ where:
 end
 
 fun yngste_eldste(valg :: String):
+  doc: "Finn den eldste eller yngste fra tabellen, og vis fullnavn plus email"
   full_navn_og_epost = select first_name, last_name, email from dummy-table end # Ta full navn og epost og lag ny tabell
   kodifisert = dummy-table.length() - 1 # Kode teller fra 0 
   if valg == "yngste":
@@ -43,6 +44,7 @@ where:
 end
 
 fun gsnitt():
+  doc: "Finn gjennomsnittet av alle alderne"
   avg-alder = extend dummy-table 
     using age:
     mean: T.running-mean of age
