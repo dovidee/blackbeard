@@ -26,6 +26,6 @@ fun olympisk-flagg(valg :: String) -> Image:
   else if valg == "farget":
     konvert-flag("blue", "yellow", "black", "green", "red")
   else:
-    raise("Du må velge enten monokrom eller farget flagg")
+    raise("Du må velge enten 'monokrom' eller 'farget' flagg")
   end
 end
