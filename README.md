@@ -1,2 +1,3 @@
 # blackbeard
-Pyret programming practice
+PYRET AHOY
+![blackbeard](images/blackbeard.jpg)
