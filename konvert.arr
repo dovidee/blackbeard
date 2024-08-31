@@ -31,7 +31,7 @@ fun nok-til-joker(nok :: Number, valg :: String) -> Number:
     konvert = nok * usd
     konvert
   else:
-    raise("Ikke gyldig valuta") # raise error hvis valg argument er ikke euro eller usd
+    raise("Valuta må vær 'euro' eller 'usd'") # raise error hvis valg argument er ikke euro eller usd
   end
 where:
   nok-til-joker(10, "euro") is 0.85
