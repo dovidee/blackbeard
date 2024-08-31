@@ -49,7 +49,7 @@ fun gsnitt():
     using age:
     mean: T.running-mean of age
   end
-  kodifisert = dummy-table.length() - 1
+  kodifisert = dummy-table.length() - 1 # Kode teller fra 0
   funnet = avg-alder.row-n(kodifisert)["mean"]
   funnet
 where:
