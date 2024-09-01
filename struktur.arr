@@ -1,6 +1,7 @@
 include gdrive-sheets
 include tables
 include math
+include chart
 import tables as T
 
 dummy-sheet = load-spreadsheet("1RYN0i4Zx_UETVuYacgaGfnFcv4l9zd9toQTTdkQkj7g")
