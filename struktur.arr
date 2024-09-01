@@ -24,10 +24,10 @@ where:
   filtrer_alder().row-n(0)["fodselsdato"] is 1999
 end
 
-fun yngste_eldste(valg :: String):
+fun yngste_eldste(valg :: String) -> String:
   doc: "Finn den eldste eller yngste fra tabellen, og vis fullnavn plus email"
-  full_navn_og_epost = select first_name, last_name, email from dummy-table end # Ta full navn og epost og lag ny tabell
-  kodifisert = dummy-table.length() - 1 # Kode teller fra 0 
+  full_navn_og_epost = select first_name, last_name, email from dummy-table end # ta full navn og epost og lag ny tabell
+  kodifisert = dummy-table.length() - 1 # kode teller fra 0 
   if valg == "yngste":
     filtrer_fnoe_yngst = order dummy-table: age descending end
     finn_yngst = filtrer_fnoe_yngst.row-n(kodifisert) # ta siste raden
@@ -44,16 +44,16 @@ fun yngste_eldste(valg :: String):
 where:
   yngste_eldste("yngste") is "Delila Tackes: dtackes5@newsvine.com"
   yngste_eldste("eldste") is "Aretha Marconi: amarconi9@gov.uk"
-  yngste_eldste("eldst") is "Aretha Marconi: amarconi9@gov.uk" # error
+  yngste_eldste("yngste") + " " + yngste_eldste("eldste") is "Delila Tackes: dtackes5@newsvine.com Aretha Marconi: amarconi9@gov.uk"
 end
 
-fun gsnitt():
+fun gsnitt() -> Number:
   doc: "Finn gjennomsnittet av alle alderne"
   avg-alder = extend dummy-table 
     using age:
     mean: T.running-mean of age # det funker ig
   end
-  kodifisert = dummy-table.length() - 1 # Kode teller fra 0
+  kodifisert = dummy-table.length() - 1 # kode teller fra 0
   funnet = avg-alder.row-n(kodifisert)["mean"]
   funnet
 where:
