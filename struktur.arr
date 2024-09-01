@@ -69,6 +69,5 @@ fun navn_alder_chart() -> Image:
   sammensatt_filtrer = sammensatt.column-n(7) # kun full navn
   alder_filtrer = sammensatt.column-n(6) # kun alder
   navn_alder_barchart = from-list.bar-chart(sammensatt_filtrer, alder_filtrer) # lag en serie med y og x
-  vis_naB = render-chart(navn_alder_barchart) # render pga performance
-  vis_naB.display() # vis etter rendering
+  render-chart(navn_alder_barchart).display()
 end
