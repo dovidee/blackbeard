@@ -26,7 +26,6 @@ end
 
 fun yngste_eldste(valg :: String) -> String:
   doc: "Finn den eldste eller yngste fra tabellen, og vis fullnavn plus email"
-  full_navn_og_epost = select first_name, last_name, email from dummy-table end # ta full navn og epost og lag ny tabell
   kodifisert = dummy-table.length() - 1 # kode teller fra 0 
   if valg == "yngste":
     filtrer_fnoe_yngst = order dummy-table: age descending end
