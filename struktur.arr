@@ -57,3 +57,14 @@ where:
   gsnitt() * 2 is 111.8 # Fins ikke mer relevant testing for gjennomsnitt; trenger flere dataset
   gsnitt() / 2 is 27.95 # Fins ikke mer relevant testing for gjennomsnitt; trenger flere dataset
 end
+
+fun navn_alder_chart() -> Image:
+  sammensatt = extend dummy-table using first_name, last_name:
+    full_name: first_name + " " + last_name # legg til en ny column med disse to
+  end
+  sammensatt_filtrer = sammensatt.column-n(7) # kun full navn
+  alder_filtrer = sammensatt.column-n(6) # kun alder
+  navn_alder_barchart = from-list.bar-chart(sammensatt_filtrer, alder_filtrer) # lag en serie med x og y
+  vis_naB = render-chart(navn_alder_barchart) # render pga performance
+  vis_naB.display() # vis etter rendering
+end
