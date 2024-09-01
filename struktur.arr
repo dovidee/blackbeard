@@ -59,12 +59,13 @@ where:
 end
 
 fun navn_alder_chart() -> Image:
+  doc: "Lager en barchart med navn på X-aksen og alder på Y-aksen" 
   sammensatt = extend dummy-table using first_name, last_name:
     full_name: first_name + " " + last_name # legg til en ny column med disse to
   end
   sammensatt_filtrer = sammensatt.column-n(7) # kun full navn
   alder_filtrer = sammensatt.column-n(6) # kun alder
-  navn_alder_barchart = from-list.bar-chart(sammensatt_filtrer, alder_filtrer) # lag en serie med x og y
+  navn_alder_barchart = from-list.bar-chart(sammensatt_filtrer, alder_filtrer) # lag en serie med y og x
   vis_naB = render-chart(navn_alder_barchart) # render pga performance
   vis_naB.display() # vis etter rendering
 end
