@@ -14,11 +14,14 @@ fun filtrer_alder():
   filtrer_nog = sieve name_og_age using age:
     (age <= 80) or (age >= 30)
   end
-  filtrer_nog
+  filtrer_dato = extend filtrer_nog using age:
+    fodselsdato: 2024 - age # fant ikke noe datetime library :(
+  end
+  filtrer_dato.drop("age") # fjern siden vi har fodselsdato
 where:
-  filtrer_alder().row-n(0)["age"] is 25
-  filtrer_alder().row-n(1)["first_name"] is "Veda"
-  filtrer_alder().row-n(9)["first_name"] is "Aretha"
+  filtrer_alder().column-n(0) is [list: "Christel", "Veda", "Adham", "York", "Benn", "Delila", "Myrtia", "Veronika", "Rivi", "Aretha"]
+  filtrer_alder().column-n(1) is [list: 1999, 1993, 1959, 1938, 1979, 2002, 1956, 1944, 1973, 1938]
+  filtrer_alder().row-n(0)["fodselsdato"] is 1999
 end
 
 fun yngste_eldste(valg :: String):
@@ -27,12 +30,12 @@ fun yngste_eldste(valg :: String):
   kodifisert = dummy-table.length() - 1 # Kode teller fra 0 
   if valg == "yngste":
     filtrer_fnoe_yngst = order dummy-table: age descending end
-    finn_yngst = filtrer_fnoe_yngst.row-n(kodifisert)
+    finn_yngst = filtrer_fnoe_yngst.row-n(kodifisert) # ta siste raden
     fulldata = finn_yngst["first_name"] + " " + finn_yngst["last_name"] + ": " + finn_yngst["email"]
     fulldata
   else if valg == "eldste":
     filtrer_fnoe_eldst = order dummy-table: age ascending end
-    finn_eldst = filtrer_fnoe_eldst.row-n(kodifisert)
+    finn_eldst = filtrer_fnoe_eldst.row-n(kodifisert) # ta siste raden
     fulldata = finn_eldst["first_name"] + " " + finn_eldst["last_name"] + ": " + finn_eldst["email"]
     fulldata
   else:
@@ -41,22 +44,22 @@ fun yngste_eldste(valg :: String):
 where:
   yngste_eldste("yngste") is "Delila Tackes: dtackes5@newsvine.com"
   yngste_eldste("eldste") is "Aretha Marconi: amarconi9@gov.uk"
-  yngste_eldste("eldst") is "Aretha Marconi: amarconi9@gov.uk" # Error
+  yngste_eldste("eldst") is "Aretha Marconi: amarconi9@gov.uk" # error
 end
 
 fun gsnitt():
   doc: "Finn gjennomsnittet av alle alderne"
   avg-alder = extend dummy-table 
     using age:
-    mean: T.running-mean of age
+    mean: T.running-mean of age # det funker ig
   end
   kodifisert = dummy-table.length() - 1 # Kode teller fra 0
   funnet = avg-alder.row-n(kodifisert)["mean"]
   funnet
 where:
   gsnitt() is 55.9
-  gsnitt() * 2 is 111.8 # Fins ikke mer relevant testing for gjennomsnitt; trenger flere dataset
-  gsnitt() / 2 is 27.95 # Fins ikke mer relevant testing for gjennomsnitt; trenger flere dataset
+  gsnitt() * 2 is 111.8
+  gsnitt() / 2 is 27.95
 end
 
 fun navn_alder_chart() -> Image:
