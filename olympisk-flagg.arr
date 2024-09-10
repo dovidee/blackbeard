@@ -20,7 +20,7 @@ fun konvert-flagg(ring1 :: String, ring2 :: String, ring3 :: String, ring4 :: St
 end
 
 fun olympisk-flagg(valg :: String) -> Image:
-  doc: "Tar et valg som et argument enten monokrom eller farget. Nested funksjon for å lage et flagg i disse fargene"
+  doc: "Tar et valg som et argument enten monokrom eller farget. Recursion for å lage et flagg i disse fargene"
   if valg == "monokrom":
     konvert-flagg("black", "black", "black", "black", "black")
   else if valg == "farget":
