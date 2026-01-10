@@ -1,5 +1,3 @@
 # blackbeard
 
-PYRET AHOY
-
-![blackbeard](images/blackbeard.jpg)
+Pyret programmering
